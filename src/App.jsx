@@ -1,12 +1,12 @@
-import "./App.sass";
-import React from "react";
-import Axios from "axios";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import './App.sass';
+import React from 'react';
+import Axios from 'axios';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
-import { Pie } from "react-chartjs-2";
+import { Pie } from 'react-chartjs-2';
 
 function App() {
-  const initialValue = "";
+  const initialValue = '';
   const [state, setState] = React.useState(null);
   const [nutrients, setNutrients] = React.useState([
     { kcal: 0 },
@@ -19,11 +19,11 @@ function App() {
   ChartJS.register(ArcElement, Tooltip, Legend);
 
   const api = Axios.create({
-    baseURL: "https://api.spoonacular.com/food/ingredients/search",
+    baseURL: 'https://api.spoonacular.com/food/ingredients/search',
   });
   const API_KEY = process.env.REACT_APP_API_KEY_EDAMAM_FOOD_DATABASE;
 
-  const fetchData = async (ingredient) => {
+  const fetchData = async ingredient => {
     try {
       // `https://api.spoonacular.com/food/ingredients/search?query=apple&number=5&apiKey=${API_KEY}`
       const { data } = await Axios.get(
@@ -43,10 +43,10 @@ function App() {
   };
 
   const chartData = {
-    labels: ["fat", "fiber", "carbs", "proteins"],
+    labels: ['fat', 'fiber', 'carbs', 'proteins'],
     datasets: [
       {
-        label: "# of Votes",
+        label: '# of Votes',
         data: [
           [nutrients][0][0].fat,
           [nutrients][0][1].fiber,
@@ -54,16 +54,16 @@ function App() {
           [nutrients][0][3].proteins,
         ],
         backgroundColor: [
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
         ],
         borderColor: [
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
         ],
         borderWidth: 1,
       },
@@ -80,59 +80,65 @@ function App() {
   // }, []);
 
   return (
-    <div className="App">
-      <nav className="navbar is-dark">
-        <div className="navbar-brand">
-          <div className="navbar-item">
-            <p>Nutrition</p>
+    <div className='App'>
+      <nav className='navbar is-dark'>
+        <div className='navbar-brand'>
+          <div className='navbar-item'>
+            <p>Nutrients</p>
           </div>
         </div>
-     
       </nav>
       <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            fetchData(event.target[0].value);
-            setInput(initialValue);
-          }}
-        >
-          <input className='input is-primary'
-            value={input.inputValue || ""}
-            onChange={handleChange}
-            placeHolder='search for Food'
-            type="text"
-          />
-          <button className="button is-dark" type="submit">
-            search
-          </button>
-        </form>
-<div className='section'>
-      <div className="container is-mobile column is-6">
-        {state &&
-          [state].map((food) => {
-            return (
-              <div className="card">
-                <div className="card-image">
-                  <figure className="image is-4by3">
-                    <img src={food.image} alt={food.label} />
-                  </figure>
-                </div>
-                <div className="card-content">
-                  <div className="media">
-                    <p className="title is-4">{food.label}</p>
-                  </div>
+        onSubmit={event => {
+          event.preventDefault();
+          fetchData(event.target[0].value);
+          setInput(initialValue);
+        }}
+      >
+        <label className='label' htmlFor='search'>
+          {' '}
+          Search Food
+        </label>
+        <input
+          name='search'
+          className='input is-primary'
+          value={input.inputValue || ''}
+          onChange={handleChange}
+          placeHolder='search for Food'
+          type='text'
+        />
 
-                  <div className="content">
-                    <p>kcal: {food.nutrients.ENERC_KCAL} / 100g</p>
+        <button className='button is-dark' type='submit'>
+          search
+        </button>
+      </form>
+      <div className='section'>
+        <div className='container is-mobile column is-6'>
+          {state &&
+            [state].map(food => {
+              return (
+                <div className='card'>
+                  <div className='card-image'>
+                    <figure className='image is-4by3'>
+                      <img src={food.image} alt={food.label} />
+                    </figure>
+                  </div>
+                  <div className='card-content'>
+                    <div className='media'>
+                      <p className='title is-4'>{food.label}</p>
+                    </div>
+
+                    <div className='content'>
+                      <p>kcal: {food.nutrients.ENERC_KCAL} / 100g</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-      </div>
-      <div className="ctn-chart">
-        <Pie data={chartData} />
-      </div>
+              );
+            })}
+        </div>
+        <div className='ctn-chart'>
+          <Pie data={chartData} />
+        </div>
       </div>
     </div>
   );
