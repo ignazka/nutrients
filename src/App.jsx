@@ -17,17 +17,17 @@ function App() {
   ]);
   const [input, setInput] = React.useState(initialValue);
   ChartJS.register(ArcElement, Tooltip, Legend);
+  const baseUrl = 'https://api.edamam.com/api/food-database/v2/';
 
   const api = Axios.create({
-    baseURL: 'https://api.spoonacular.com/food/ingredients/search',
+    baseURL: baseUrl,
   });
   const API_KEY = process.env.REACT_APP_API_KEY_EDAMAM_FOOD_DATABASE;
-
+  const APP_ID = process.env.REACT_APP_APP_ID;
   const fetchData = async ingredient => {
     try {
-      // `https://api.spoonacular.com/food/ingredients/search?query=apple&number=5&apiKey=${API_KEY}`
-      const { data } = await Axios.get(
-        `https://api.edamam.com/api/food-database/v2/parser?ingr=${ingredient}&app_id=03d7032c&app_key=344290a004b263d49aece40206c5c59a`
+      const { data } = await api.get(
+        `parser?ingr=${ingredient}&app_id=${APP_ID}&app_key=${API_KEY}`
       );
       setState(data.parsed[0].food);
       const nutrientsArr = [
@@ -104,7 +104,6 @@ function App() {
           className='input is-primary'
           value={input.inputValue || ''}
           onChange={handleChange}
-          placeHolder='search for Food'
           type='text'
         />
 
