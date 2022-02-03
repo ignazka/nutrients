@@ -101,10 +101,11 @@ function App() {
         </label>
         <input
           name='search'
-          className='input is-primary'
+          className='input is-danger'
           value={input.inputValue || ''}
           onChange={handleChange}
           type='text'
+          placeholder='Potato'
         />
 
         <button className='button is-dark' type='submit'>
@@ -124,7 +125,7 @@ function App() {
                   </div>
                   <div className='card-content'>
                     <div className='media'>
-                      <p className='title is-4'>{food.label}</p>
+                      <p className='title is-3'>{food.label}</p>
                     </div>
 
                     <div className='content'>
