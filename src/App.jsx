@@ -101,7 +101,7 @@ function App() {
         </label>
         <input
           name='search'
-          className='input is-danger'
+          className='input is-dark'
           value={input.inputValue || ''}
           onChange={handleChange}
           type='text'
@@ -140,6 +140,7 @@ function App() {
           <Pie data={chartData} />
         </div>
       </div>
+      <footer>&copy; Philipp Kastl, 2022</footer>
     </div>
   );
 }
