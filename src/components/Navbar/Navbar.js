@@ -25,14 +25,17 @@ function Navbar() {
       </div>
       <div id='navBar' className={`navbar-menu ${toggle && 'is-active'}`}>
         <div className='navbar-start'>
-          <a className='navbar-item'>Search Food</a>
-
-          <a className='navbar-item'>My Food List</a>
+          <Link to='/search' className='navbar-item'>
+            Search Food
+          </Link>
+          <Link to='' className='navbar-item'>
+            Food List
+          </Link>
         </div>
         <div className='navbar-end'>
           <div className='navbar-item'>
             <div className='buttons'>
-              <Link to='' className='button auth is-primary'>
+              <Link to='/signup' className='button auth is-primary'>
                 Signup
               </Link>
               <Link to='' className='button auth is-light'>
