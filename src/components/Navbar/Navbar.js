@@ -1,11 +1,45 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
+  const [toggle, setToggle] = React.useState(false);
+
   return (
     <nav className='navbar is-dark'>
       <div className='navbar-brand'>
         <div className='navbar-item'>
           <p>Nutrients</p>
+        </div>
+        <a
+          role='button'
+          className={`navbar-burger ${toggle && 'is-active'}`}
+          aria-label='menu'
+          aria-expanded='false'
+          data-target='navBar'
+          onClick={() => setToggle(!toggle)}
+        >
+          <span aria-hidden='true'></span>
+          <span aria-hidden='true'></span>
+          <span aria-hidden='true'></span>
+        </a>
+      </div>
+      <div id='navBar' className={`navbar-menu ${toggle && 'is-active'}`}>
+        <div className='navbar-start'>
+          <a className='navbar-item'>Search Food</a>
+
+          <a className='navbar-item'>My Food List</a>
+        </div>
+        <div className='navbar-end'>
+          <div className='navbar-item'>
+            <div className='buttons'>
+              <Link to='' className='button auth is-primary'>
+                Signup
+              </Link>
+              <Link to='' className='button auth is-light'>
+                Login
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
