@@ -1,47 +1,17 @@
 import './App.sass';
 import React from 'react';
-import Axios from 'axios';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-
 import { Pie } from 'react-chartjs-2';
+import { useFoodAPI } from './api';
 
 function App() {
   const initialValue = '';
-  const [state, setState] = React.useState(null);
-  const [nutrients, setNutrients] = React.useState([
-    { kcal: 0 },
-    { fat: 0 },
-    { fiber: 0 },
-    { carbs: 0 },
-    { proteins: 0 },
-  ]);
+
   const [input, setInput] = React.useState(initialValue);
   ChartJS.register(ArcElement, Tooltip, Legend);
-  const baseUrl = 'https://api.edamam.com/api/food-database/v2/';
 
-  const api = Axios.create({
-    baseURL: baseUrl,
-  });
-  const API_KEY = process.env.REACT_APP_API_KEY_EDAMAM_FOOD_DATABASE;
-  const APP_ID = process.env.REACT_APP_APP_ID;
-  const fetchData = async ingredient => {
-    try {
-      const { data } = await api.get(
-        `parser?ingr=${ingredient}&app_id=${APP_ID}&app_key=${API_KEY}`
-      );
-      setState(data.parsed[0].food);
-      const nutrientsArr = [
-        { fat: data.parsed[0].food.nutrients.FAT },
-        { fiber: data.parsed[0].food.nutrients.FIBTG },
-        { carbs: data.parsed[0].food.nutrients.CHOCDF },
-        { proteins: data.parsed[0].food.nutrients.PROCNT },
-      ];
-      setNutrients([...nutrientsArr]);
-    } catch (error) {
-      console.error(`Error while fetching data ${error}`);
-    }
-  };
-
+  const { nutrients, fetchData, state } = useFoodAPI();
+  console.log(nutrients);
   const chartData = {
     labels: ['fat', 'fiber', 'carbs', 'proteins'],
     datasets: [
