@@ -1,10 +1,9 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
-
 function Chart({ nutrients }) {
-  console.log(nutrients);
+  ChartJS.register(ArcElement, Tooltip, Legend);
+
   const chartData = {
     labels: ['fat', 'fiber', 'carbs', 'proteins'],
     datasets: [
