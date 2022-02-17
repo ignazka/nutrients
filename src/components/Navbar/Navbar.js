@@ -38,7 +38,7 @@ function Navbar() {
               <Link to='/signup' className='button auth is-primary'>
                 Signup
               </Link>
-              <Link to='' className='button auth is-light'>
+              <Link to='/login' className='button auth is-light'>
                 Login
               </Link>
             </div>

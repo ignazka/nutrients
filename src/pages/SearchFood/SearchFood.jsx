@@ -1,8 +1,8 @@
 import React from 'react';
-import { Searchbar } from '../components/Searchbar';
-import { Chart } from '../components/Chart';
-import { FoodCard } from '../components/FoodCard';
-import { useFoodAPI } from '../api';
+import { Searchbar } from '../../components/Searchbar';
+import { Chart } from '../../components/Chart';
+import { FoodCard } from '../../components/FoodCard';
+import { useFoodAPI } from '../../api';
 
 function SearchFood() {
   const { nutrients, state, fetchData } = useFoodAPI();
