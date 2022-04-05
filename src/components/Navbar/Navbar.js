@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 function Navbar() {
   const [toggle, setToggle] = React.useState(false);
-
+  const { user, handleLogout } = useAuth();
+  const navigateTo = useNavigate();
   return (
     <nav className='navbar is-dark'>
       <div className='navbar-brand'>
@@ -25,23 +26,54 @@ function Navbar() {
       </div>
       <div id='navBar' className={`navbar-menu ${toggle && 'is-active'}`}>
         <div className='navbar-start'>
-          <Link to='/search' className='navbar-item'>
+          <Link
+            to='/search'
+            onClick={() => setToggle(false)}
+            className='navbar-item'
+          >
             Search Food
           </Link>
-          <Link to='' className='navbar-item'>
+          <Link
+            to='/list'
+            onClick={() => setToggle(false)}
+            className='navbar-item'
+          >
             Food List
           </Link>
         </div>
         <div className='navbar-end'>
           <div className='navbar-item'>
-            <div className='buttons'>
-              <Link to='/signup' className='button auth is-primary'>
-                Signup
-              </Link>
-              <Link to='' className='button auth is-light'>
-                Login
-              </Link>
-            </div>
+            {!user ? (
+              <div className='buttons'>
+                <Link
+                  to='/signup'
+                  onClick={() => setToggle(false)}
+                  className='button auth is-primary'
+                >
+                  Signup
+                </Link>
+                <Link
+                  to='/login'
+                  onClick={() => setToggle(false)}
+                  className='button auth is-light'
+                >
+                  Login
+                </Link>
+              </div>
+            ) : (
+              <div>
+                logged in: {user.email}{' '}
+                <button
+                  className='button is-danger'
+                  onClick={() => {
+                    handleLogout();
+                    navigateTo('/search');
+                  }}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

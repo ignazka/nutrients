@@ -6,15 +6,27 @@ import { useFoodAPI } from '../api';
 
 function SearchFood() {
   const { nutrients, state, fetchData } = useFoodAPI();
+  const [toggle, setToggle] = React.useState(false);
+
+  const handleChange = event => {
+    console.log(event);
+    setToggle(true);
+
+    setTimeout(function () {
+      setToggle(false);
+    }, 2000);
+  };
   return (
     <div>
-      <h2>Search for Food</h2>
-
       <Searchbar onChange={event => fetchData(event)} />
+      <div className={`note ${toggle && 'opened'}`}>added sucessfully</div>
 
       <div className='section'>
         <div className='container is-mobile column is-6'>
-          {state && [state].map(food => <FoodCard food={food} />)}
+          {state &&
+            [state].map(food => (
+              <FoodCard food={food} setToggle={handleChange} />
+            ))}
         </div>
 
         <Chart nutrients={nutrients} />
