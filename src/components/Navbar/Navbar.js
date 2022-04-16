@@ -61,8 +61,8 @@ function Navbar() {
                 </Link>
               </div>
             ) : (
-              <div>
-                logged in: {user.email}{' '}
+              <div className='logged-ctn'>
+                <p>logged in: {user.email} </p>
                 <button
                   className='button is-danger'
                   onClick={() => {

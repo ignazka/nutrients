@@ -38,11 +38,11 @@ function FoodList() {
       `http://localhost:4000/api/food/${target.id}`
     );
     getFood();
-    console.log(target);
   };
   React.useEffect(() => {
     getFood();
   }, []);
+
   let amountSum = 0;
   let kcalSum = 0;
   let carbSum = 0;
@@ -58,6 +58,17 @@ function FoodList() {
         value={thisDate}
         onChange={handleChange}
       ></input>
+      {/* <LocalizationProvider dateAdapter={AdapterDateFns}> */}
+      {/* <DatePicker
+        views={['day']}
+        label='Just date'
+        value={thisDate}
+        onChange={newValue => {
+          setThisDate(newValue);
+        }}
+        renderInput={params => <TextField {...params} helperText={null} />}
+      /> */}
+      {/* </LocalizationProvider> */}
 
       <TableContainer component={Paper}>
         <Table

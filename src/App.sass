@@ -1,9 +1,19 @@
 @use 'variables' as *
 body
   background-color: #e9e9e9
+
 .App
   text-align: center
   background-color: #FFFFFF
+.Footer
+  font-size: 0.8em
+  padding: 1em
+  position: absolute
+  bottom: 0
+  display: flex
+  justify-content: center
+  margin: auto
+  width: 100vw
 
 .FoodSearch
 .note
@@ -18,6 +28,11 @@ body
 .opened
   opacity: 1
 .FoodList
+
+  input
+    width: 40vw
+    background: #3b3b3bee
+    color: white
 .FoodList-table
 
   img
@@ -69,6 +84,14 @@ body
       text-align: center
 
     .navbar
+
+      .logged-ctn
+        align-items: center
+        display: flex
+
+        p
+          padding-right: 1em
+
       .buttons
 
       .card
@@ -97,11 +120,6 @@ body
 
       .container
         font-size: 1.5em
-      footer
-        font-size: 1.3em
-        padding: 2em
-
-        margin: auto
 
   p
     text-align: center
